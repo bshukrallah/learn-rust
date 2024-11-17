@@ -45,4 +45,20 @@ fn main() {
     let slice: &str = &string[0..5];
     println!("Slice Value: {}", slice);
 
+    hello_world();
+    tell_height(182);
+    human_id("George", 30, 190.2);
+
+}
+
+fn hello_world() {
+    println!("Hello Rust!");
+}
+
+fn tell_height(height: i32) {
+    println!("Height is {}", height);
+}
+
+fn human_id(name: &str, age: u32, height: f32) {
+    println!("My name is {}, I am {} years old. My height is {}", name, age, height);
 }
