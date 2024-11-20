@@ -49,6 +49,39 @@ fn main() {
     tell_height(182);
     human_id("George", 30, 190.2);
 
+    let _X = {
+        let price = 5;
+        let qty = 10;
+        price * qty
+    };
+
+    println!("Result is: {}", _X);
+
+    println!("Add these numbers: {}", add(3,4));
+
+    let s1 = String::from("RUST");
+    println!("The length of {} is {}", s1, calc_length(&s1));
+
+    let mut _num: i32 =5;
+    let mut _copy: &i32 = &_num;
+
+    println!("{}, {}", _num, _copy); //output: 5, 5 (_copy is a copy of _num)
+    let _num: i32 = 7;
+    println!("{}, {}", _num, _copy); //output: 7, 5 (_copy retains the original _num)
+    let mut _copy: i32 = _num;
+
+    println!("{}, {}", _num, _copy); //output: 7, 5 (_copy retains the original _num)
+
+    let mut account: BankAccount = BankAccount {
+        owner: "Alice".to_string(),
+        balance: 150.55,
+    };
+
+    account.check_balance();
+    account.withdraw(30.33);
+    account.check_balance();
+
+
 }
 
 fn hello_world() {
@@ -61,4 +94,29 @@ fn tell_height(height: i32) {
 
 fn human_id(name: &str, age: u32, height: f32) {
     println!("My name is {}, I am {} years old. My height is {}", name, age, height);
+}
+
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn calc_length(s: &String) -> usize {
+    s.len()
+}
+
+struct BankAccount {
+    owner: String,
+    balance: f64,
+}
+
+impl BankAccount {
+    fn withdraw(&mut self, amount: f64) {
+        println!("Withdrawing {} from account, owned by {}", amount, self.owner);
+        self.balance -= amount;
+    }
+
+    fn check_balance(&self) {
+        println!("Account owned by {} has balance of {}", self.owner, self.balance);
+    }
+
 }
