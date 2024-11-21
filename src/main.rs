@@ -81,6 +81,47 @@ fn main() {
     account.withdraw(30.33);
     account.check_balance();
 
+    let x = 5;
+    let x = x + 1;
+    {
+        let x = x * 2;
+        println!("Value of x in scope {x}");
+    }
+    println!("Value of x out of scope {x}");
+
+    let age: u16 = 18;
+    if age >= 18 {
+        println!("You can drive a car!");
+    } else {
+        println!("You aren't old enough to drive!");
+    }
+
+    //loop runs forever until told to stop
+    let mut counter: i32 = 0;
+    let result = loop {
+        counter += 1;
+        println!("Current Count: {counter}");
+        if counter == 10 {
+            break counter *2
+        }  
+    };
+    println!("Final result: {result}");
+
+    let a = [1, 2, 3, 4, 5, 6];
+    for element in a {
+        println!("{element}");
+    }
+
+    let mut user1 : User = User {
+        active: true,
+        username: String::from("username"),
+        email: String::from("user@test.com"),
+        sign_in_count: 30,
+    };
+
+    user1.email = String::from("Newuser@test.com");
+
+    println!("{} email is: {}", user1.username, user1.email);
 
 }
 
@@ -119,4 +160,18 @@ impl BankAccount {
         println!("Account owned by {} has balance of {}", self.owner, self.balance);
     }
 
+}
+
+struct Book {
+    title: String,
+    author: String,
+    pages: u32,
+    available: bool,
+}
+
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64
 }
