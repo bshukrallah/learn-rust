@@ -13,7 +13,7 @@ fn main() {
     let letter: char = 'a';
     println!("First letter: {}", letter);
 
-    let numbers : [i32; 5]= [1,2,3,4,5];
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
     println!("Array {:?}", numbers);
 
     let fruits: [&str; 3] = ["apples", "banana", "orange"];
@@ -22,17 +22,17 @@ fn main() {
     let human: (String, i32, bool) = ("Alice".to_string(), 30, false);
     println!("Human Tuple: {:?}", human);
 
-    let my_mix_tuple = ("Kratos", 23, true, [1,2,3,4,5]);
+    let my_mix_tuple = ("Kratos", 23, true, [1, 2, 3, 4, 5]);
     println!("Mixed Tuple {:?}", my_mix_tuple);
 
     //Slices -- dynamically sized
-    let number_slices : &[i32] = &[1,2,3,4,5];
+    let number_slices: &[i32] = &[1, 2, 3, 4, 5];
     println!("Number Slices {:?}", number_slices);
 
-    let animal_slices : &[&str] = &["Lion", "Elephant", "Crocodile"];
+    let animal_slices: &[&str] = &["Lion", "Elephant", "Crocodile"];
     println!("Animal Slices {:?}", animal_slices);
 
-    let book_slices : &[&String] = &[&"Harry Potter".to_string(), &"Elephant Book".to_string()];
+    let book_slices: &[&String] = &[&"Harry Potter".to_string(), &"Elephant Book".to_string()];
     println!("Book Slices {:?}", book_slices);
 
     // Strings vs String Slices (&str)
@@ -57,12 +57,12 @@ fn main() {
 
     println!("Result is: {}", _X);
 
-    println!("Add these numbers: {}", add(3,4));
+    println!("Add these numbers: {}", add(3, 4));
 
     let s1 = String::from("RUST");
     println!("The length of {} is {}", s1, calc_length(&s1));
 
-    let mut _num: i32 =5;
+    let mut _num: i32 = 5;
     let mut _copy: &i32 = &_num;
 
     println!("{}, {}", _num, _copy); //output: 5, 5 (_copy is a copy of _num)
@@ -102,8 +102,8 @@ fn main() {
         counter += 1;
         println!("Current Count: {counter}");
         if counter == 10 {
-            break counter *2
-        }  
+            break counter * 2;
+        }
     };
     println!("Final result: {result}");
 
@@ -112,7 +112,7 @@ fn main() {
         println!("{element}");
     }
 
-    let mut user1 : User = User {
+    let mut user1: User = User {
         active: true,
         username: String::from("username"),
         email: String::from("user@test.com"),
@@ -123,6 +123,14 @@ fn main() {
 
     println!("{} email is: {}", user1.username, user1.email);
 
+    let mut user2: User = build_user(String::from("reishi@reishi.com"), String::from("reishi"));
+
+    println!("{} email is: {}", user2.username, user2.email);
+    let car = Sedan;
+    let suv = SUV;
+
+    road_trip(&car);
+    road_trip(&suv);
 }
 
 fn hello_world() {
@@ -134,7 +142,10 @@ fn tell_height(height: i32) {
 }
 
 fn human_id(name: &str, age: u32, height: f32) {
-    println!("My name is {}, I am {} years old. My height is {}", name, age, height);
+    println!(
+        "My name is {}, I am {} years old. My height is {}",
+        name, age, height
+    );
 }
 
 fn add(a: i32, b: i32) -> i32 {
@@ -152,14 +163,19 @@ struct BankAccount {
 
 impl BankAccount {
     fn withdraw(&mut self, amount: f64) {
-        println!("Withdrawing {} from account, owned by {}", amount, self.owner);
+        println!(
+            "Withdrawing {} from account, owned by {}",
+            amount, self.owner
+        );
         self.balance -= amount;
     }
 
     fn check_balance(&self) {
-        println!("Account owned by {} has balance of {}", self.owner, self.balance);
+        println!(
+            "Account owned by {} has balance of {}",
+            self.owner, self.balance
+        );
     }
-
 }
 
 struct Book {
@@ -173,5 +189,31 @@ struct User {
     active: bool,
     username: String,
     email: String,
-    sign_in_count: u64
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        active: true,
+        email,
+        username,
+        sign_in_count: 1,
+    }
+}
+
+struct Sedan;
+impl LandCapable for Sedan {}
+
+struct SUV;
+impl LandCapable for SUV {}
+
+trait LandCapable {
+    fn drive(&self) {
+        println!("Vehicle is driving");
+    }
+}
+
+
+fn road_trip(vehicle: &dyn LandCapable) {
+    vehicle.drive();
 }
